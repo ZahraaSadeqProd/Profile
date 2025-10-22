@@ -101,7 +101,7 @@ export default function Home() {
             zkarem12@gmail.com
           </a>
           <a
-            href="https://github.com/yourgithub"
+            href="https://github.com/ZahraaSadeqProd"
             target="_blank"
             rel="noopener noreferrer"
             className="text-accent-coral underline hover:opacity-80"
@@ -109,7 +109,7 @@ export default function Home() {
             GitHub
           </a>
           <a
-            href="https://www.linkedin.com/in/yourlinkedin"
+            href="https://www.linkedin.com/in/zahraa-sadeq-460199145/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-accent-coral underline hover:opacity-80"
