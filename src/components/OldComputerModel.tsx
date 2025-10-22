@@ -1,11 +1,12 @@
 'use client';
 import { useGLTF } from '@react-three/drei';
+import type { JSX } from 'react';
 
-export function OldComputerModel(props: any) {
-  // This hook loads the model from your public folder
+type OldComputerModelProps = Omit<JSX.IntrinsicElements['primitive'], 'object'>;
+
+export function OldComputerModel(props: OldComputerModelProps) {
   const { scene } = useGLTF('/models/old-computer.glb');
   return <primitive object={scene} {...props} />;
 }
 
-// Optional: preload for faster render
 useGLTF.preload('/models/old-computer.glb');
