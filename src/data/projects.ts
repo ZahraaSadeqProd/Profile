@@ -12,7 +12,7 @@ const projects = [
     description:
         'A Flutter application with two main parts: Messaging Interface (Flutter-native) and Dashboard (Angular + Tailwind)',
     tech: ['Flutter', 'Angular', 'TailwindCSS', 'Node.js', 'Android Studio'],
-    demoUrl: 'https://turbovets.netlify.app/tickets',
+    demoUrl: 'https://turbovets.netlify.app',
     repoUrl: 'https://github.com/ZahraaSadeqProd/TurboVets'
     },
 ];

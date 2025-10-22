@@ -35,28 +35,46 @@ export default function Home() {
               className="border border-gray-200 dark:border-gray-700 p-6 rounded-lg 
                          hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
             >
-              <Link href={`/projects/${p.slug}`} className="block">
-                <h3 className="text-xl font-bold mb-2 text-accent-coral hover:underline">
+              <Link href={`/projects/${p.slug}`} className="block mb-3">
+                <h3 className="text-xl font-bold mb-1 text-accent-coral hover:underline">
                   {p.name}
                 </h3>
+                <p className="text-gray-700 dark:text-gray-300 mb-2">
+                  {p.description}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Tech: {p.tech.join(', ')}
+                </p>
               </Link>
-              <p className="text-gray-700 dark:text-gray-300 mb-3">
-                {p.description}
-              </p>
-              <p className="text-sm text-gray-500">
-                Tech: {p.tech.join(', ')}
-              </p>
 
-              {p.demoUrl && (
-                <a
-                  href={p.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-3 text-accent-coral underline hover:opacity-80"
-                >
-                  Live Demo →
-                </a>
-              )}
+              {/* ACTION LINKS */}
+              <div className="flex gap-4 flex-wrap mt-4">
+                {p.demoUrl && (
+                  <a
+                    href={p.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-4 py-2 rounded-md font-semibold 
+                               text-black bg-accent-gradient shadow-sm
+                               hover:brightness-110 transition"
+                  >
+                    Live Demo →
+                  </a>
+                )}
+                {p.repoUrl && (
+                  <a
+                    href={p.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-4 py-2 rounded-md font-semibold 
+                               border-2 border-accent-coral 
+                               text-accent-coral hover:bg-accent-coral hover:text-white
+                               transition"
+                  >
+                    Repository →
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
