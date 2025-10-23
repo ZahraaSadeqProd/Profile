@@ -12,16 +12,11 @@ export default function Home() {
       <section id="about" className="mt-20 scroll-mt-24">
         <h2 className="text-2xl sm:text-3xl font-semibold mb-4">About Me</h2>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          I’m an Electrical & Computer Engineer pivoting into full‑stack
-          development. I love designing and building performant, intuitive
-          web apps capable of solving real‑world problems. My strengths span
-          system‑level thinking, modern web frameworks, and collaborative
-          engineering practices.
+          Hi! I'm a software engineer who enjoys diving into software architecture and crafting engaging websites, bringing ideas to life with full-stack development
         </p>
-        <p className="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed">
-          I focus on React/Next.js, TypeScript, Node.js, and PostgreSQL.
-          I enjoy crafting both the architecture and the user experience.
-        </p>
+        {/* <p className="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+      
+        </p> */}
       </section>
 
       {/* PROJECTS */}
@@ -90,7 +85,7 @@ export default function Home() {
           <span className="text-green-600 dark:text-green-400 font-semibold">
             open to full‑time roles
           </span>{' '}
-          — software engineering and full‑stack development positions.
+          — software engineering positions.
         </p>
 
         <div className="space-x-6">
