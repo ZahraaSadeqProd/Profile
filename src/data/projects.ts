@@ -1,20 +1,13 @@
 const projects = [
-    {
-        slug: 'employee-management-system',
-        name: 'Employee Management System',
-        description: 'Employee Management System dashboard (placeholder).',
-        tech: ['Java Spring Boot', 'React', 'Bootstrap', 'MySQL', 'Vite'],
-        demoUrl: '',
-    },
-    {
-    slug: 'turbovets',
-    name: 'TurboVets',
+  {
+    slug: "angular-todo-app",
+    name: "Angular To-Do App",
     description:
-        'A Flutter application with two main parts: Messaging Interface (Flutter-native) and Dashboard (Angular + Tailwind)',
-    tech: ['Flutter', 'Angular', 'TailwindCSS', 'Node.js', 'Android Studio'],
-    demoUrl: 'https://turbovets.netlify.app',
-    repoUrl: 'https://github.com/ZahraaSadeqProd/TurboVets'
-    },
+      "A simple To-Do application built with Angular and styled with bootstrap.",
+    tech: ["Angular", "Bootstrap"],
+    demoUrl: "https://zas-angulartodoapp.netlify.app/",
+    repoUrl: "https://github.com/ZahraaSadeqProd/Angular-Todo-App",
+  },
 ];
 
 export default projects;
