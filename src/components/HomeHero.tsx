@@ -1,5 +1,3 @@
-import SceneCanvas from './SceneCanvas';
-
 export default function HomeHero() {
   return (
     <section
@@ -60,9 +58,6 @@ export default function HomeHero() {
           </a>
         </div>
       </div>
-        <div className="flex">
-        <SceneCanvas />
-        </div>
     </section>
   );
 }

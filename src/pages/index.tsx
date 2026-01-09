@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import HomeHero from '../components/HomeHero';
-import projects from '../data/projects';
+import Link from "next/link";
+import HomeHero from "../components/HomeHero";
+import projects from "../data/projects";
 
 export default function Home() {
   return (
@@ -14,15 +14,15 @@ export default function Home() {
           About Me
         </h2>
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base sm:text-lg">
-          I’m an Electrical & Computer Engineer pivoting into full‑stack
+          I'm an Electrical & Computer Engineer pivoting into full-stack
           development. I love designing and building performant, intuitive web
-          apps capable of solving real‑world problems. My strengths span
-          system‑level thinking, modern web frameworks, and collaborative
+          apps capable of solving real-world problems. My strengths span
+          system-level thinking, modern web frameworks, and collaborative
           engineering practices.
         </p>
         <p className="mt-4 text-gray-700 dark:text-gray-300 leading-relaxed text-base sm:text-lg">
-          I focus on React/Next.js, TypeScript, Node.js, and PostgreSQL. I enjoy
-          crafting both architecture and user experience.
+          I focus on Angular, Node.js, React, Next.js, MongoDB, and PostgreSQL.
+          I enjoy crafting both architecture and user experience.
         </p>
       </section>
 
@@ -47,7 +47,7 @@ export default function Home() {
                   {p.description}
                 </p>
                 <p className="text-xs sm:text-sm text-gray-500">
-                  Tech: {p.tech.join(', ')}
+                  Tech: {p.tech.join(", ")}
                 </p>
               </Link>
 
@@ -59,10 +59,12 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 sm:flex-initial text-center px-4 py-2 rounded-md font-semibold 
-                               text-white bg-accent-gradient shadow-sm
+                               text-black
+                               
+                               bg-accent-gradient shadow-sm
                                hover:brightness-110 transition"
                   >
-                    🔗 Live Demo
+                    Live Demo
                   </a>
                 )}
                 {p.repoUrl && (
@@ -70,12 +72,15 @@ export default function Home() {
                     href={p.repoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 sm:flex-initial text-center px-4 py-2 rounded-md font-semibold 
-                               border-2 border-accent-coral 
-                               text-accent-coral hover:bg-accent-coral hover:text-white 
-                               transition"
+                    className="flex-1 sm:flex-initial text-center px-4 py-2 rounded-md font-semibold border-2 
+                               border-accent-coral
+                               text-accent-coral 
+                               hover:text-white
+                               hover:bg-accent-coral
+                               dark:hover:bg-accent-coral 
+                                transition-all duration-300"
                   >
-                    💾 Repository
+                    Repository
                   </a>
                 )}
               </div>
@@ -89,12 +94,14 @@ export default function Home() {
         id="contact"
         className="mt-20 mb-16 sm:mb-20 text-center scroll-mt-24"
       >
-        <h2 className="text-xl sm:text-3xl font-semibold mb-4">Let’s Connect</h2>
+        <h2 className="text-xl sm:text-3xl font-semibold mb-4">
+          Let’s Connect
+        </h2>
         <p className="text-gray-700 dark:text-gray-300 mb-6 text-base sm:text-lg">
-          I’m currently{' '}
+          I’m currently{" "}
           <span className="text-green-600 dark:text-green-400 font-semibold">
             open to full‑time roles
-          </span>{' '}
+          </span>{" "}
           — software engineering and full‑stack development positions.
         </p>
 
