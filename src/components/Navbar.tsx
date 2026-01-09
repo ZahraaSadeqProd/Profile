@@ -49,7 +49,7 @@ export default function Navbar() {
           Contact
         </Link>
         <a
-          href="/resume.pdf"
+          href="https://drive.google.com/file/d/1aXriT1BCm5DMpi05Hcbj8HWuX7D7GeXx/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="decoration-2 hover:text-accent-coral"
