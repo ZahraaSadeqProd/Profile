@@ -3,10 +3,10 @@
   <defs>
     <linearGradient id="gradient-3" bx:pinned="true"/>
     <linearGradient id="gradient-2" bx:pinned="true">
-      <stop offset="0" style="stop-color: rgb(233, 195, 220);"/>
-      <stop offset="0.348" style="stop-color: rgb(246, 184, 175);"/>
-      <stop offset="0.67" style="stop-color: rgb(251, 187, 140);"/>
-      <stop offset="0.948" style="stop-color: rgb(252, 225, 143);"/>
+      <stop offset="0" style="stop-color: rgb(249, 168, 212);"/>
+      <stop offset="0.4" style="stop-color: rgb(246, 137, 124);"/>
+      <stop offset="0.7" style="stop-color: rgb(255, 176, 163);"/>
+      <stop offset="1" style="stop-color: rgb(253, 230, 138);"/>
     </linearGradient>
     <linearGradient id="gradient-2-0" href="#gradient-2" gradientUnits="userSpaceOnUse" x1="49.123" y1="0" x2="49.123" y2="699"/>
     <radialGradient id="gradient-2-1" href="#gradient-2" gradientUnits="userSpaceOnUse" cx="643.918" cy="519.907" r="283.135"/>

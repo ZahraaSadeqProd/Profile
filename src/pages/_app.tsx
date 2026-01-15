@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Zahraa Sadeq | Software Engineer</title>
       </Head>
-      <div className="bg-bgLight text-textLight dark:bg-bgDark dark:text-textDark min-h-screen transition-colors duration-300">
+      <div className="bg-white text-gray-900 dark:bg-bgDark dark:text-gray-100 min-h-screen">
         <Navbar />
         <Component {...pageProps} />
         <Footer />
