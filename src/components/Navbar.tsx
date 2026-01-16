@@ -58,8 +58,7 @@ export default function Navbar() {
               alt="Z logo"
               width={36}
               height={36}
-              className="rounded [filter:drop-shadow(1px_1px_0px_rgba(0,0,0,0.45))]
-                         dark:[filter:drop-shadow(1px_1px_0px_rgba(255,255,255,0.25))]"
+              className="rounded"
             />
             <span
               className="bg-clip-text text-transparent bg-accent-gradient

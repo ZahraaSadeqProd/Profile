@@ -14,7 +14,7 @@ export default function Home() {
                        text-gray-900 dark:text-white">
           About Me
         </h2>
-        <div className="bg-gradient-to-br from-white/95 via-primary-50/30 to-secondary-50/40
+        <div className="bg-gradient-to-br from-white/95 via-primary-50/30 to-tertiary-50/40
                         dark:from-surface-dark-elevated dark:via-surface-dark-elevated dark:to-surface-dark-elevated
                         rounded-2xl p-6 sm:p-8
                         border border-primary-200/60 dark:border-gray-700/50
@@ -87,8 +87,8 @@ export default function Home() {
                     rel="noopener noreferrer"
                     className="flex-1 text-center px-4 py-2.5 rounded-lg font-semibold 
                                text-white text-sm
-                               bg-gradient-to-r from-primary-500 to-primary-400
-                               shadow-sm hover:shadow-md hover:from-primary-600 hover:to-primary-500 
+                               bg-accent-gradient
+                               shadow-sm hover:shadow-md hover:opacity-90 
                                transition-all"
                   >
                     Live Demo

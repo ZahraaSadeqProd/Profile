@@ -3,7 +3,7 @@ export default function Footer() {
   
   return (
     <footer className="border-t border-primary-200/60 dark:border-gray-700/50 
-                       bg-gradient-to-r from-primary-100/50 via-white/80 to-secondary-100/40
+                       bg-gradient-to-r from-primary-50/50 via-white/80 to-tertiary-50/40
                        dark:from-surface-dark-elevated dark:via-surface-dark-elevated dark:to-surface-dark-elevated
                        mt-16 backdrop-blur-sm shadow-inner shadow-primary-50/50 dark:shadow-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
