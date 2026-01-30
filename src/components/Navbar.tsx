@@ -8,28 +8,34 @@ export default function Navbar() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
     { href: '/#about', label: 'About' },
-    { href: '/#education', label: 'Education' },
     { href: '/#experience', label: 'Experience' },
     { href: '/#projects', label: 'Projects' },
     { href: '/#contact', label: 'Contact' },
   ];
 
-  // Theme toggle button component to avoid repetition
+  // Theme toggle button component
   const ThemeToggle = () => (
     <button
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle theme"
-      className="relative rounded-full p-2 hover:bg-primary-50 dark:hover:bg-surface-dark-elevated 
+      className="relative rounded-lg p-2.5 
+                 hover:bg-gray-100 dark:hover:bg-slate-700
                  transition-colors duration-200"
     >
       {mounted ? (
         resolvedTheme === 'dark' ? (
-          <svg className="w-5 h-5 text-secondary-400" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" 
                   stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
           </svg>
@@ -46,38 +52,40 @@ export default function Navbar() {
 
   return (
     <nav
-      className="border-b border-primary-200/60 dark:border-gray-700/50 
-                 bg-white/85 dark:bg-surface-dark/90 
-                 backdrop-blur-md sticky top-0 z-50
-                 shadow-sm shadow-primary-100/30 dark:shadow-none"
+      className={`sticky top-0 z-50 transition-all duration-300
+                 ${scrolled 
+                   ? 'bg-white dark:bg-[#141219] shadow-lg border-b border-pink-200/50 dark:border-pink-700/30' 
+                   : 'bg-transparent'}`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Left side: logo + name */}
-          <Link href="/" className="flex items-center gap-2 font-semibold text-lg">
-            <Image
-              src="/logo.svg"
-              alt="Z logo"
-              width={36}
-              height={36}
-              className="rounded"
-            />
-            <span
-              className="bg-clip-text text-transparent bg-accent-gradient
-                         font-bold"
-            >
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="relative">
+              <Image
+                src="/logo.svg"
+                alt="Z logo"
+                width={36}
+                height={36}
+                className="rounded transition-all duration-300 group-hover:scale-110 filter drop-shadow-sm"
+              />
+            </div>
+            <span className="text-gradient font-bold text-lg tracking-tight hidden sm:inline">
               Zahraa Sadeq
             </span>
           </Link>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex gap-6 items-center">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-600 dark:text-gray-300 hover:text-primary-500 
-                           dark:hover:text-primary-400 transition-colors font-medium"
+                className="px-3.5 py-2 rounded-lg text-sm font-medium
+                           text-gray-600 dark:text-gray-400 
+                           hover:text-pink-600 dark:hover:text-pink-400
+                           hover:bg-pink-50 dark:hover:bg-pink-900/10
+                           transition-all duration-200"
               >
                 {link.label}
               </Link>
@@ -86,14 +94,15 @@ export default function Navbar() {
               href="https://drive.google.com/file/d/1GWC3OAR8ZIWbXhyxW_b27A5-9GU8FHAj/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-600 dark:text-gray-300 hover:text-primary-500 
-                         dark:hover:text-primary-400 transition-colors font-medium"
+              className="ml-2 px-4 py-2 rounded-lg text-sm font-semibold
+                         text-white bg-gradient-to-r from-pink-500 to-rose-500
+                         hover:from-pink-600 hover:to-rose-600
+                         shadow-md hover:shadow-lg
+                         transition-all duration-200"
             >
               Resume
             </a>
-
-            {/* Theme toggle button */}
-            <div className="ml-2">
+            <div className="ml-2 border-l border-pink-200 dark:border-pink-700/30 pl-3">
               <ThemeToggle />
             </div>
           </div>
@@ -104,7 +113,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
-              className="rounded-lg p-2 hover:bg-primary-50 dark:hover:bg-surface-dark-elevated transition-colors"
+              className="rounded-lg p-2 hover:bg-pink-50 dark:hover:bg-pink-900/10 transition-colors"
             >
               {mobileMenuOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,17 +131,17 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200/80 dark:border-gray-700/50 
-                        bg-white dark:bg-surface-dark">
-          <div className="px-4 py-4 space-y-3">
+        <div className="md:hidden bg-white dark:bg-[#141219] border-t border-pink-200/50 dark:border-pink-700/30">
+          <div className="px-4 py-3 space-y-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="block py-2 px-3 rounded-lg text-gray-600 dark:text-gray-300 
-                           hover:bg-primary-50 dark:hover:bg-surface-dark-elevated 
-                           hover:text-primary-500 transition-colors font-medium"
+                className="block py-3 px-4 rounded-lg text-gray-600 dark:text-gray-400 
+                           hover:bg-pink-50 dark:hover:bg-pink-900/10 
+                           hover:text-pink-700 dark:hover:text-pink-300
+                           transition-colors font-medium"
               >
                 {link.label}
               </Link>
@@ -142,11 +151,10 @@ export default function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="block py-2 px-3 rounded-lg text-gray-600 dark:text-gray-300 
-                         hover:bg-primary-50 dark:hover:bg-surface-dark-elevated 
-                         hover:text-primary-500 transition-colors font-medium"
+              className="block py-3 px-4 mt-2 rounded-lg text-center font-semibold
+                         text-white bg-gradient-to-r from-pink-500 to-rose-500"
             >
-              Resume
+              View Resume
             </a>
           </div>
         </div>

@@ -10,15 +10,6 @@ body {
   @apply text-gray-800 dark:text-gray-100;
   @apply antialiased;
   min-height: 100vh;
-  background: linear-gradient(135deg, #FEF5F3 0%, #FFF1EB 50%, #FFFAF8 100%);
-  background-attachment: fixed;
-}
-
-.dark body,
-body:where(.dark, .dark *) {
-  @apply dark:from-surface-dark dark:via-surface-dark dark:to-surface-dark;
-  background-image: none;
-  background-color: #0F172A;
 }
 
 /* Custom utility classes */
@@ -41,60 +32,176 @@ body:where(.dark, .dark *) {
 /* Better focus styles */
 a:focus-visible,
 button:focus-visible {
-  @apply outline-none ring-2 ring-primary-500 ring-offset-2 ring-offset-white dark:ring-offset-surface-dark;
+  @apply outline-none ring-2 ring-pink-500 ring-offset-2 ring-offset-white dark:ring-offset-surface-dark;
 }
 
-/* Consistent section backgrounds */
+/* ========================================
+   MODERN SLEEK CORAL THEME STYLES
+   ======================================== */
+
 @layer components {
+  /* Main background with enhanced coral accents */
   .theme-bg {
-    @apply bg-gradient-to-br;
-    background: linear-gradient(135deg, #FFF5E6 0%, #FFE6D5 15%, #FFD9E1 30%, #F5E6FF 50%, #E6F3FF 75%, #E6FFFF 100%);
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #ffeef5 0%, #fff4f0 25%, #fff8f4 50%, #fff0f8 75%, #ffeef5 100%);
+    position: relative;
+  }
+  
+  .theme-bg::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.12) 0%, rgba(244, 63, 94, 0.08) 40%, rgba(251, 146, 60, 0.1) 100%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   .dark .theme-bg {
-    @apply dark:bg-bgDark;
-    background: #0F172A;
-    background-attachment: initial;
+    background: linear-gradient(135deg, #0f0e13 0%, #141219 25%, #0f0e13 50%, #0d0c11 75%, #0a0a0e 100%);
   }
   
-  /* Unified glass card style for light theme */
-  .glass-card {
-    @apply rounded-2xl backdrop-blur-lg border-2 transition-all duration-300;
-    background: rgba(255, 255, 255, 0.75);
-    border-color: rgba(232, 111, 93, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(232, 111, 93, 0.08);
+  .dark .theme-bg::before {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.16) 0%, rgba(244, 63, 94, 0.11) 40%, rgba(251, 146, 60, 0.13) 100%);
+    opacity: 0.85;
   }
   
-  .glass-card:hover {
-    background: rgba(255, 255, 255, 0.85);
-    border-color: #EC4899;
-    box-shadow: 0 12px 40px 0 rgba(236, 72, 147, 0.25);
+  /* Sleek modern card style with coral accent */
+  .pro-card {
+    @apply rounded-xl transition-all duration-300;
+    background: #FFFFFF;
+    border: 1.5px solid rgba(236, 72, 153, 0.15);
+    box-shadow: 
+      0 2px 6px rgba(236, 72, 153, 0.05),
+      0 8px 20px rgba(236, 72, 153, 0.04);
+    position: relative;
+    overflow: hidden;
   }
   
-  .dark .glass-card {
-    background: rgba(30, 41, 59, 0.7);
-    border-color: rgba(148, 163, 184, 0.15);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  .pro-card:hover {
+    border-color: rgba(236, 72, 153, 0.4);
+    box-shadow: 
+      0 6px 16px rgba(236, 72, 153, 0.12),
+      0 12px 32px rgba(244, 63, 94, 0.06);
+    transform: translateY(-2px);
   }
   
-  .dark .glass-card:hover {
-    background: rgba(30, 41, 59, 0.8);
-    border-color: #EC4899;
-    box-shadow: 0 12px 40px 0 rgba(236, 72, 147, 0.35);
+  .dark .pro-card {
+    background: #161420;
+    border-color: rgba(236, 72, 153, 0.22);
+    box-shadow: 
+      0 2px 6px rgba(236, 72, 153, 0.07),
+      0 8px 20px rgba(236, 72, 153, 0.05);
   }
   
+  .dark .pro-card:hover {
+    border-color: rgba(236, 72, 153, 0.52);
+    box-shadow: 
+      0 6px 16px rgba(236, 72, 153, 0.16),
+      0 12px 32px rgba(244, 63, 94, 0.09);
+  }
+  
+  /* Section title styling with coral accent */
+  .section-title {
+    @apply text-2xl sm:text-3xl font-bold mb-6;
+    @apply text-gray-900 dark:text-white;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #EC4899 0%, #F43F5E 50%, #FB923C 100%);
+    border-radius: 2px;
+    box-shadow: 0 3px 12px rgba(236, 72, 153, 0.35);
+  }
+  
+  /* Ensure scrolled navbar styling with pink colors */
+  nav[class*="border-pink"] {
+    border-color: rgba(236, 72, 153, 0.2) !important;
+  }
+  
+  .dark nav[class*="border-pink"] {
+    border-color: rgba(236, 72, 153, 0.15) !important;
+  }
+  
+  /* Skill/tech tag with coral accent */
+  .tech-tag {
+    @apply text-xs font-medium px-3 py-1.5 rounded-lg;
+    @apply bg-gradient-to-r from-pink-50 to-rose-100 text-pink-700;
+    @apply dark:from-pink-900/25 dark:to-rose-900/20 dark:text-pink-300;
+    @apply transition-all duration-200 border border-pink-200 dark:border-pink-700/40;
+  }
+  
+  .tech-tag:hover {
+    @apply from-pink-100 to-rose-200 text-pink-800;
+    @apply dark:from-pink-800/40 dark:to-rose-700/30 dark:text-pink-200;
+    transform: scale(1.05);
+    @apply shadow-sm;
+  }
+  
+  /* Primary button with coral gradient */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3;
+    @apply font-semibold text-white rounded-lg;
+    @apply transition-all duration-300;
+    background: linear-gradient(135deg, #EC4899 0%, #F43F5E 50%, #FB923C 100%);
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.35);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(236, 72, 153, 0.45), 0 4px 14px rgba(244, 63, 94, 0.25);
+  }
+  
+  /* Secondary/outline button with coral accent */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3;
+    @apply font-semibold rounded-lg border-2;
+    @apply border-pink-300 text-pink-700;
+    @apply dark:border-pink-600/60 dark:text-pink-300;
+    @apply hover:border-pink-500 hover:text-pink-800 hover:bg-pink-50;
+    @apply dark:hover:border-pink-500 dark:hover:text-pink-200 dark:hover:bg-pink-900/15;
+    @apply transition-all duration-300;
+    background: transparent;
+  }
+  
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.15);
+  }
+  
+  /* Text gradient with coral */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-accent-gradient;
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #EC4899 0%, #F43F5E 40%, #FB923C 70%, #D97706 100%);
   }
   
-  /* Light theme outline button with proper hover contrast */
-  .btn-outline {
-    @apply border-2 border-primary-500 text-primary-600 dark:text-primary-400
-           bg-white/80 dark:bg-transparent
-           hover:bg-primary-500 hover:text-white hover:border-primary-500
-           dark:hover:bg-primary-500 dark:hover:text-white dark:hover:border-primary-500
-           transition-all duration-300;
+  /* Status badge */
+  .status-badge {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium;
+    @apply bg-emerald-50 text-emerald-700;
+    @apply dark:bg-emerald-900/20 dark:text-emerald-400;
+  }
+  
+  /* Experience timeline dot with coral */
+  .timeline-dot {
+    @apply w-3.5 h-3.5 rounded-full;
+    background: linear-gradient(135deg, #EC4899 0%, #F43F5E 100%);
+    box-shadow: 0 0 0 5px rgba(236, 72, 153, 0.28);
+  }
+  
+  /* Link hover effect */
+  .link-hover {
+    @apply text-gray-600 dark:text-gray-400;
+    @apply hover:text-pink-600 dark:hover:text-pink-400;
+    @apply transition-colors duration-200;
   }
 }
 

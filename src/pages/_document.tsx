@@ -11,7 +11,7 @@ export default function Document() {
           name="description"
           content="Portfolio of Zahraa Sadeq – Software Engineer."
         />
-        <meta name="theme-color" content="#f67f77" />
+        <meta name="theme-color" content="#EC4899" />
       </Head>
       <body>
         <Main />

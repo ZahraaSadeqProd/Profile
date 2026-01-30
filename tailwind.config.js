@@ -40,11 +40,11 @@ module.exports = {
           600: '#D97706',
           700: '#B45309',
         },
-        // Neutral surfaces
+        // Neutral surfaces (unified dark mode palette)
         surface: {
           light: '#FAFAFA',
-          dark: '#0F172A',
-          'dark-elevated': '#1E293B',
+          dark: '#0A0A0E',
+          'dark-elevated': '#141219',
         },
         // Status colors harmonized with brand
         success: {
