@@ -13,6 +13,8 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/#about', label: 'About' },
+    { href: '/#education', label: 'Education' },
+    { href: '/#experience', label: 'Experience' },
     { href: '/#projects', label: 'Projects' },
     { href: '/#contact', label: 'Contact' },
   ];
@@ -81,7 +83,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="https://drive.google.com/file/d/1aXriT1BCm5DMpi05Hcbj8HWuX7D7GeXx/view?usp=sharing"
+              href="https://drive.google.com/file/d/1GWC3OAR8ZIWbXhyxW_b27A5-9GU8FHAj/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 dark:text-gray-300 hover:text-primary-500 
@@ -136,7 +138,7 @@ export default function Navbar() {
               </Link>
             ))}
             <a
-              href="https://drive.google.com/file/d/1aXriT1BCm5DMpi05Hcbj8HWuX7D7GeXx/view?usp=sharing"
+              href="https://drive.google.com/file/d/1GWC3OAR8ZIWbXhyxW_b27A5-9GU8FHAj/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
