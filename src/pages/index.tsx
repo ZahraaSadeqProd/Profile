@@ -16,13 +16,7 @@ export default function Home() {
         >
           About Me
         </h2>
-        <div
-          className="bg-gradient-to-br from-white/95 via-primary-50/30 to-tertiary-50/40
-                        dark:from-surface-dark-elevated dark:via-surface-dark-elevated dark:to-surface-dark-elevated
-                        rounded-2xl p-6 sm:p-8
-                        border border-primary-200/60 dark:border-gray-700/50
-                        shadow-md shadow-primary-100/50 dark:shadow-none backdrop-blur-sm"
-        >
+        <div className="glass-card p-6 sm:p-8">
           <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-base sm:text-lg">
             I&apos;m an Electrical &amp; Computer Engineer pivoting into
             full-stack development. I love designing and building performant,
@@ -46,13 +40,7 @@ export default function Home() {
           Education &amp; Certifications
         </h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div
-            className="bg-gradient-to-br from-white/95 via-primary-50/30 to-secondary-50/30
-                          dark:from-surface-dark-elevated dark:via-surface-dark-elevated dark:to-surface-dark-elevated
-                          rounded-2xl p-6 sm:p-8
-                          border border-primary-200/60 dark:border-gray-700/50
-                          shadow-md shadow-primary-100/40 dark:shadow-none backdrop-blur-sm"
-          >
+          <div className="glass-card p-6 sm:p-8">
             <h3 className="text-lg sm:text-xl font-bold text-primary-600 dark:text-primary-400 mb-3">
               Education
             </h3>
@@ -82,13 +70,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div
-            className="bg-gradient-to-br from-white/95 via-tertiary-50/30 to-primary-50/30
-                          dark:from-surface-dark-elevated dark:via-surface-dark-elevated dark:to-surface-dark-elevated
-                          rounded-2xl p-6 sm:p-8
-                          border border-primary-200/60 dark:border-gray-700/50
-                          shadow-md shadow-primary-100/40 dark:shadow-none backdrop-blur-sm"
-          >
+          <div className="glass-card p-6 sm:p-8">
             <h3 className="text-lg sm:text-xl font-bold text-primary-600 dark:text-primary-400 mb-4">
               Certifications
             </h3>
@@ -167,13 +149,7 @@ export default function Home() {
           Work Experience
         </h2>
         <div className="space-y-6">
-          <div
-            className="bg-gradient-to-br from-white/95 via-tertiary-50/30 to-primary-50/30
-                          dark:from-surface-dark-elevated dark:via-surface-dark-elevated dark:to-surface-dark-elevated
-                          rounded-2xl p-6 sm:p-8
-                          border border-primary-200/60 dark:border-gray-700/50
-                          shadow-md shadow-primary-100/40 dark:shadow-none backdrop-blur-sm"
-          >
+          <div className="glass-card p-6 sm:p-8">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
               <h3 className="text-lg sm:text-xl font-bold text-primary-600 dark:text-primary-400">
                 Software Engineer - II
@@ -230,13 +206,7 @@ export default function Home() {
           {projects.map((p) => (
             <div
               key={p.slug}
-              className="border border-primary-200/60 dark:border-gray-700/50 p-5 sm:p-6 rounded-2xl 
-                         bg-gradient-to-br from-white/95 to-primary-50/30 dark:from-surface-dark-elevated dark:to-surface-dark-elevated
-                         hover:border-primary-400 dark:hover:border-primary-500/50
-                         shadow-sm shadow-primary-100/40 dark:shadow-none
-                         hover:shadow-lg hover:shadow-primary-200/60 dark:hover:shadow-primary-500/10
-                         transition-all duration-300
-                         flex flex-col backdrop-blur-sm"
+              className="glass-card p-5 sm:p-6 flex flex-col"
             >
               <Link
                 href={`/projects/${p.slug}`}
@@ -310,13 +280,7 @@ export default function Home() {
         id="contact"
         className="mt-16 sm:mt-24 mb-8 sm:mb-12 scroll-mt-24"
       >
-        <div
-          className="bg-gradient-to-br from-primary-100/60 via-white/90 to-secondary-100/50 
-                        dark:from-surface-dark-elevated dark:via-surface-dark dark:to-surface-dark-elevated 
-                        rounded-2xl p-8 sm:p-12 text-center
-                        border border-primary-200/70 dark:border-gray-700/50
-                        backdrop-blur-sm shadow-md shadow-primary-100/40 dark:shadow-none"
-        >
+        <div className="glass-card p-8 sm:p-12 text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
             Let&apos;s Connect
           </h2>
