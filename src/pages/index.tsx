@@ -44,6 +44,9 @@ export default function Home() {
       {/* EDUCATION */}
       <section id="education" className="py-12 sm:py-16 scroll-mt-24">
         <h2 className="section-title">Education</h2>
+        <h3 className="text-base font-bold text-gray-900 dark:text-white mt-8 mb-4 uppercase tracking-wide">
+          Degrees
+        </h3>
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="pro-card p-6 sm:p-8">
             <div className="flex items-start gap-4">
