@@ -1,0 +1,99 @@
+{
+  "title": "Round 2: green worlds for zahraasadeq.dev",
+  "question": "Every earlier option is gone. These are new directions built around green, with bold editorial type. Keep the lead, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Field Guide",
+      "kicker": "THE ROLL",
+      "lineage": "Naturalist field guides and herbarium specimen plates",
+      "thesis": "Your work catalogued like a field guide: each product a full-color specimen plate, named in huge bold type, with a collector's tag giving the habitat (stack), date, and field notes on how it works.",
+      "palette": ["#0F3D2E", "#2E7D4F", "#C6E86B", "#F2F0E6"],
+      "materials": ["saturated deep-green plate fields", "heavy bold specimen names", "collector's tags and index numbers"],
+      "viewport": "A cover plate: ZAHRAA SADEQ in massive type over a deep forest-green field, the subtitle 'A field guide to an AI engineer', and plate index 01 Nesvia / 02 Swazona Media / 03 Raytheon to AI. Résumé and email sit on the collector's tag.",
+      "risk": "Botanical cues could soften the technical read if the plates show leaves instead of systems; the specimens must be diagrams of real architecture.",
+      "raised": [
+        {"from": "challenger-oscilloscope", "raise": "Each specimen plate carries a measured grid with real numbers (data sources, agents, years), like a graticule."},
+        {"from": "challenger-dumbar", "raise": "Color commits at block scale: whole plates in solid green fields, never a green accent on white."},
+        {"from": "challenger-elbow", "raise": "One frame system runs the whole site; nav is the index tab on the plate edge, not a generic top bar."}
+      ]
+    },
+    {
+      "id": "model-pick",
+      "label": "Circuit Board",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "PCB solder mask, silkscreen and copper traces",
+      "thesis": "The site is a circuit board: solder-mask green ground, white silkscreen type, and copper traces that draw themselves as you scroll, routing from your Raytheon embedded work into the AI products.",
+      "palette": ["#0B4F30", "#E9F2EC", "#C98A3D", "#062A1A"],
+      "materials": ["solder mask", "silkscreen labels", "copper traces and pads"],
+      "viewport": "Your name in huge silkscreen-white type on board green, with component designators (U1 NESVIA, U2 SWAZONA) and a trace leading down the page.",
+      "risk": "The most literal 'electrical engineer' idea; it can tip into theme-park if the traces don't carry real information."
+    },
+    {
+      "id": "challenger-oscilloscope",
+      "label": "Signal Bench",
+      "verdict": "competitive",
+      "lineage": "CRT oscilloscopes",
+      "thesis": "Phosphor-green traces on dark glass; each product is a channel, and the hero waveform settles when you 'trigger' it.",
+      "palette": ["#7CFF9B", "#0A0F0C", "#3A4A40", "#FFB547"],
+      "materials": ["phosphor trace", "etched graticule", "seven-segment readouts"],
+      "viewport": "A live canvas waveform behind ZAHRAA SADEQ in condensed instrument caps.",
+      "case": "Speaks to your ECE background and is very green, but it is dark and techy rather than editorial.",
+      "risk": "Reads 'hacker terminal' to non-engineers.",
+      "hero": "https://impeccable.style/worlds/cards/scientific-notation-oscilloscope-signal-bench-hero.webp"
+    },
+    {
+      "id": "challenger-dumbar",
+      "label": "Block Identity",
+      "verdict": "competitive",
+      "lineage": "Studio Dumbar modular identities",
+      "thesis": "Loud grass-green bars and product screenshots snap together on a strict module; bold, graphic, confident.",
+      "palette": ["#1FB45A", "#0E1A12", "#E9EDEA", "#FFD23F"],
+      "materials": ["flat vector bars", "product photography", "multiply overlaps"],
+      "viewport": "Oversized green bars crossing your name and a tilted Nesvia screen.",
+      "case": "Bold and editorial, but less tied to who you are.",
+      "risk": "Can look like a design agency instead of an engineer.",
+      "hero": "https://impeccable.style/worlds/cards/studio-dumbar-identity-hero.webp"
+    },
+    {
+      "id": "challenger-elbow",
+      "label": "Starship Console",
+      "verdict": "declined",
+      "lineage": "sci-fi pill-cornered wall panels",
+      "thesis": "Pastel elbow frames on black.",
+      "palette": ["#000000", "#C9A0DC", "#F5B78E", "#E8C547"],
+      "materials": ["flat pastel blocks"],
+      "viewport": "Elbow frames around each section.",
+      "case": "No green, and too fan-culture.",
+      "kept": "One frame system that is the whole grid.",
+      "risk": "Parody risk.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-elbow-panel-console-hero.webp"
+    },
+    {
+      "id": "challenger-cracktro",
+      "label": "Cracktro Scroller",
+      "verdict": "declined",
+      "lineage": "demoscene title screens",
+      "thesis": "Bitmap text over drifting starfields.",
+      "palette": ["#000000", "#F2EEDC", "#FFB000"],
+      "materials": ["bitmap type", "parallax dust"],
+      "viewport": "One line of bitmap text over a black void.",
+      "case": "Not your world; hard to read.",
+      "kept": "Depth by layered drift speeds.",
+      "risk": "Unreadable for recruiters.",
+      "hero": "https://impeccable.style/worlds/cards/operate-c-cracktro-scroller-queue-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A clean, modern developer portfolio in green, executed impeccably.",
+    "palette": ["#FFFFFF", "#0F172A", "#16A34A"],
+    "materials": ["clean grid", "project cards", "product screenshots"],
+    "viewport": "Name, one-line role, CTA buttons, then a project grid.",
+    "risk": "Looks like most other portfolios by design."
+  },
+  "steer": true
+}

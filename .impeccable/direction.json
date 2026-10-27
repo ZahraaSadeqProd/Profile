@@ -1,0 +1,101 @@
+{
+  "title": "Choose the visual world for zahraasadeq.dev",
+  "question": "Editorial, bold type, warm rose, as you asked. Here's the committed take. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Feature Issue",
+      "kicker": "THE ROLL",
+      "lineage": "Design-magazine cover stories and feature spreads",
+      "thesis": "The site is a magazine issue about Zahraa: a cover, then each product as a full feature story with folios, deks and pull quotes.",
+      "palette": ["#E8436A", "#1A0F14", "#F7E9EC", "#FFB199"],
+      "materials": ["full-bleed rose color fields", "heavy condensed grotesk display", "printed folios and page numbers"],
+      "viewport": "Cover: ZAHRAA SADEQ set edge to edge on a full rose field, with cover lines (Nesvia, Swazona Media, From Raytheon to AI) and an 'Issue 2026' masthead. Résumé and email sit as the cover price/barcode corner.",
+      "risk": "Can feel like a costume if the magazine devices (folios, issue numbers) are applied without real editorial hierarchy.",
+      "raised": [
+        {"from": "challenger-hatch-show", "raise": "Every display line is fitted to fill the full measure, never floating at a timid size."},
+        {"from": "challenger-step-row", "raise": "A single running folio line tracks where you are in the issue, like a chase light across the page."},
+        {"from": "challenger-jackfield", "raise": "Link and state are drawn in stroke (underline weight, rule breaks), never by hue alone."}
+      ],
+      "board": "https://impeccable.style/worlds/cards/posters-covers-sleeves-hatch-show-print.webp"
+    },
+    {
+      "id": "model-pick",
+      "label": "The Model Card",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "arXiv papers and ML model cards",
+      "thesis": "Zahraa presented as a research paper: abstract, figures, tables, each product a numbered section with real architecture diagrams.",
+      "palette": ["#FAF7F5", "#16121A", "#D63A63"],
+      "materials": ["two-column paper grid", "figure captions", "architecture diagrams"],
+      "viewport": "Title block with name, affiliations (Raytheon, U of Arizona), an abstract, and Figure 1: the Nesvia scoring pipeline.",
+      "risk": "The most familiar 'AI engineer' look, and less bold than the editorial direction you asked for."
+    },
+    {
+      "id": "challenger-hatch-show",
+      "label": "Wood-Type Broadside",
+      "verdict": "competitive",
+      "lineage": "Hatch Show Print letterpress gig posters",
+      "thesis": "One tall broadside: name, products and experience stacked as full-width wood-type bands.",
+      "palette": ["#F1E6D2", "#141414", "#B3263A", "#1F3A6B"],
+      "materials": ["wood type", "off-register overprint"],
+      "viewport": "ZAHRAA SADEQ / AI ENGINEER / NOW SHOWING: NESVIA, stacked in carved bands.",
+      "case": "Very strong bold-type energy, but a gig poster says 'music' louder than 'AI engineer'.",
+      "risk": "Reads nostalgic and crafty rather than technical.",
+      "hero": "https://impeccable.style/worlds/cards/posters-covers-sleeves-hatch-show-print-hero.webp"
+    },
+    {
+      "id": "challenger-step-row",
+      "label": "Step Sequencer",
+      "verdict": "declined",
+      "lineage": "early-80s drum machines",
+      "thesis": "Career as a 16-step pattern under a running chase light.",
+      "palette": ["#222", "#E5322D", "#F28C28", "#F2D13A"],
+      "materials": ["silkscreen panel", "LED keys"],
+      "viewport": "A step row where each lit key is a project.",
+      "case": "Playful, but hiring managers don't recognize themselves in it.",
+      "kept": "The single running line that always shows where 'now' is.",
+      "risk": "Gimmick over substance.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-drum-machine-step-row-hero.webp"
+    },
+    {
+      "id": "challenger-jackfield",
+      "label": "Patchbay Schedule",
+      "verdict": "declined",
+      "lineage": "machine-room jackfield schedules",
+      "thesis": "Numbered amber lanes on black glass.",
+      "palette": ["#0B0B0C", "#F2A93B"],
+      "materials": ["black glass", "amber link rails"],
+      "viewport": "Lanes 01-48 with each project tied to its stack.",
+      "case": "Too cold, and drops the rose you asked for.",
+      "kept": "State is drawn by stroke pattern, not color.",
+      "risk": "Unreadable to non-engineers.",
+      "hero": "https://impeccable.style/worlds/cards/operate-b-normalled-jackfield-hero.webp"
+    },
+    {
+      "id": "challenger-multiplane",
+      "label": "Multiplane Dawn",
+      "verdict": "declined",
+      "lineage": "cel-animation multiplane cameras",
+      "thesis": "Painted parallax planes.",
+      "palette": ["#2F4A33", "#8FA3A8", "#3A2A1F", "#F2B35A"],
+      "materials": ["gouache planes"],
+      "viewport": "A misty forest scene.",
+      "case": "No connection to her work.",
+      "kept": "Scroll-linked depth: layers moving at different speeds.",
+      "risk": "Off-subject.",
+      "hero": "https://impeccable.style/worlds/cards/cinema-cinematography-editing-multiplane-cel-dawn-hero.webp"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A clean, modern developer portfolio, executed impeccably.",
+    "palette": ["#FFFFFF", "#111827", "#E8436A"],
+    "materials": ["clean grid", "project cards", "product screenshots"],
+    "viewport": "Name, one-line role, CTA buttons, then a project grid.",
+    "risk": "Indistinguishable from thousands of other portfolios by design."
+  },
+  "steer": true
+}

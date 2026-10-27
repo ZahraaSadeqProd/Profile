@@ -1,297 +1,288 @@
+import Head from "next/head";
 import Link from "next/link";
-import HomeHero from "../components/HomeHero";
-import projects from "../data/projects";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { SplitText } from "gsap/dist/SplitText";
+import { useGSAP } from "@gsap/react";
+import { CHAPTERS, story, range } from "../components/scene/story";
+import { Arrow } from "../components/Logo";
+import Contact from "../components/Contact";
+import { intro, links, projects, sappers, raytheon, education } from "../content";
+
+const Workbench = dynamic(() => import("../components/scene/Workbench"), { ssr: false });
+
+if (typeof window !== "undefined") gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
+
+const [nesvia, swazona] = projects;
+const vh = (id: string) => CHAPTERS.find((c) => c.id === id)!.vh;
+
+function useWebGL() {
+  const [ok, setOk] = useState<boolean | null>(null);
+  useEffect(() => {
+    try {
+      const c = document.createElement("canvas");
+      setOk(!!(c.getContext("webgl2") || c.getContext("webgl")));
+    } catch {
+      setOk(false);
+    }
+  }, []);
+  return ok;
+}
 
 export default function Home() {
+  const root = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  const webgl = useWebGL();
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      story.reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const heroEnd = range("hero")[1];
+
+      ScrollTrigger.create({
+        trigger: ".story",
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: (self) => {
+          story.target = self.progress;
+          if (story.reduced) story.p = self.progress;
+          // the scene opens out of its hero frame into the full viewport
+          const t = Math.min(1, self.progress / heroEnd);
+          const e = 1 - Math.pow(1 - t, 3);
+          stage.current?.style.setProperty("--open", String(e));
+          story.open = e;
+          root.current?.style.setProperty("--open", String(e));
+        },
+        onToggle: (self) => {
+          story.active = self.isActive || self.progress < 1;
+        },
+      });
+      ScrollTrigger.create({
+        trigger: ".after",
+        start: "top 10%",
+        onEnter: () => { story.active = false; },
+        onLeaveBack: () => { story.active = true; },
+      });
+
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const split = SplitText.create(".hero-name", { type: "chars", mask: "chars" });
+        gsap.from(split.chars, { yPercent: 110, duration: 1.1, ease: "expo.out", stagger: 0.035, delay: 0.15 });
+
+        gsap.utils.toArray<HTMLElement>(".panel").forEach((panel) => {
+          const head = panel.querySelector("h2");
+          if (head) {
+            const s = SplitText.create(head, { type: "lines", mask: "lines" });
+            gsap.from(s.lines, { yPercent: 105, duration: 1, ease: "expo.out", stagger: 0.08, scrollTrigger: { trigger: panel, start: "top 80%" } });
+          }
+          // hand over cleanly: each panel leaves before the next chapter's panel arrives
+          if (window.matchMedia("(min-width: 861px)").matches) {
+            gsap.to(panel, { autoAlpha: 0, y: -24, ease: "none", scrollTrigger: { trigger: panel.parentElement, start: "bottom 105%", end: "bottom 80%", scrub: true } });
+          }
+          gsap.from(panel.querySelectorAll(".reveal"), { y: 16, opacity: 0, duration: 0.9, ease: "expo.out", stagger: 0.06, scrollTrigger: { trigger: panel, start: "top 75%" } });
+        });
+
+        gsap.utils.toArray<HTMLElement>(".after .rise").forEach((el) => {
+          gsap.from(el, { y: 28, opacity: 0, duration: 1, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 92%", once: true } });
+        });
+      });
+
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+      return () => mm.revert();
+    },
+    { scope: root }
+  );
+
   return (
-    <main className="px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto relative z-10">
-      {/* HERO */}
-      <HomeHero />
+    <div ref={root}>
+      <Head>
+        <title>Zahraa Sadeq · AI/ML Engineer</title>
+        <meta name="description" content="Zahraa Sadeq is an AI/ML engineer who builds AI products end to end: Nesvia and Swazona Media. Sr. Software Engineer at Sappers Group, formerly embedded C/C++ at Raytheon." />
+        <meta property="og:title" content="Zahraa Sadeq · AI/ML Engineer" />
+        <meta property="og:description" content={intro} />
+      </Head>
 
-      {/* ABOUT */}
-      <section id="about" className="py-12 sm:py-16 scroll-mt-24">
-        <h2 className="section-title">About Me</h2>
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <div className="pro-card p-6 sm:p-8">
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base mb-3">
-                I&apos;m an Electrical &amp; Computer Engineer with a Master&apos;s degree, 
-                transitioning into full-stack development. I specialize in building performant, 
-                intuitive web applications that solve real-world problems.
-              </p>
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-base">
-                My background in systems engineering gives me a unique perspective on architecture 
-                and scalability. I focus on modern technologies including Angular, React, Next.js, 
-                Node.js, and cloud platforms.
-              </p>
-            </div>
-          </div>
-          <div>
-            <div className="pro-card p-6 sm:p-8 h-full">
-              <h3 className="text-base font-bold text-gray-900 dark:text-white mb-4 uppercase tracking-wide">
-                Core Technologies
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {['Angular', 'React', 'Next.js', 'Node.js', 'TypeScript', 'MongoDB', 'PostgreSQL', 'AWS'].map((tech) => (
-                  <span key={tech} className="tech-tag">{tech}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div ref={stage} className="stage" aria-hidden="true">
+        <div className="stage-frame">{webgl ? <Workbench /> : <div className="stage-fallback" />}</div>
+      </div>
 
-      {/* EDUCATION */}
-      <section id="education" className="py-12 sm:py-16 scroll-mt-24">
-        <h2 className="section-title">Education</h2>
-        <h3 className="text-base font-bold text-gray-900 dark:text-white mt-8 mb-4 uppercase tracking-wide">
-          Degrees
-        </h3>
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="pro-card p-6 sm:p-8">
-            <div className="flex items-start gap-4">
-              <div className="timeline-dot mt-1.5 flex-shrink-0"></div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white text-base">
-                  M.S. Electrical &amp; Computer Engineering
-                </h3>
-                <p className="text-pink-600 dark:text-pink-400 font-medium mt-1">
-                  University of Arizona
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
-                  2020 – 2022 • GPA: 3.8/4.0
-                </p>
-              </div>
-            </div>
+      <div className="story">
+        <section className="ch ch-hero" style={{ height: `${vh("hero")}vh` }}>
+          <div className="hero-top wrap">
+            <h1 className="hero-name">Zahraa Sadeq</h1>
           </div>
-          <div className="pro-card p-6 sm:p-8">
-            <div className="flex items-start gap-4">
-              <div className="timeline-dot mt-1.5 flex-shrink-0"></div>
-              <div>
-                <h3 className="font-bold text-gray-900 dark:text-white text-base">
-                  B.S. Electrical &amp; Computer Engineering
-                </h3>
-                <p className="text-pink-600 dark:text-pink-400 font-medium mt-1">
-                  University of Arizona
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
-                  2015 – 2020 • GPA: 3.4/4.0
-                </p>
-              </div>
-            </div>
+          <p className="scroll-cue">Scroll to step inside the work</p>
+        </section>
+
+        <section className="ch" style={{ height: `${vh("shoulder")}vh` }} aria-hidden="true" />
+
+        <section className="ch" style={{ height: `${vh("sappers")}vh` }}>
+          <article className="panel">
+            <h2>{sappers.org}</h2>
+            <p className="reveal">{sappers.summary}</p>
+            <dl className="facts reveal">
+              <div><dt>Role</dt><dd>{sappers.role}, {sappers.org}</dd></div>
+              <div><dt>Years</dt><dd className="mono">{sappers.years}</dd></div>
+              <div><dt>Stack</dt><dd className="mono">{sappers.stack.join(" / ")}</dd></div>
+            </dl>
+            <Link href="#experience" className="arrow-link reveal">What I do there <Arrow /></Link>
+          </article>
+        </section>
+
+        <section className="ch" style={{ height: `${vh("raytheon")}vh` }}>
+          <article className="panel">
+            <h2>{raytheon.org}</h2>
+            <p className="reveal">{raytheon.summary}</p>
+            <dl className="facts reveal">
+              <div><dt>Role</dt><dd>{raytheon.role}, {raytheon.org}</dd></div>
+              <div><dt>Years</dt><dd className="mono">{raytheon.years}</dd></div>
+              <div><dt>Stack</dt><dd className="mono">{raytheon.stack.join(" / ")}</dd></div>
+            </dl>
+            <Link href="#experience" className="arrow-link reveal">What I did there <Arrow /></Link>
+          </article>
+        </section>
+
+        <section className="ch" style={{ height: `${vh("nesvia")}vh` }}>
+          <ProjectPanel p={nesvia} hand="founder, sole engineer" />
+        </section>
+
+        <section className="ch" style={{ height: `${vh("swazona")}vh` }}>
+          <ProjectPanel p={swazona} hand="co-built with a small team" />
+        </section>
+
+        <section className="ch" style={{ height: `${vh("finale")}vh` }} aria-hidden="true" />
+      </div>
+
+      <div className="after">
+        <section id="work" className="work-index wrap" aria-labelledby="work-h">
+          <h2 id="work-h" className="rise">Selected work</h2>
+          <ol className="work-list">
+            {projects.map((p) => (
+              <li key={p.slug} className="rise">
+                <Link href={`/work/${p.slug}`} className="work-row">
+                  <span className="work-name">{p.name}</span>
+                  <span className="work-line">{p.line}</span>
+                  <span className="work-meta mono">{p.role} · {p.tags.join(" / ")}</span>
+                  <span className="work-go" aria-hidden="true"><Arrow /></span>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="experience" className="exp wrap" aria-labelledby="exp-h">
+          <div className="exp-head rise">
+            <h2 id="exp-h">Experience</h2>
+            <p className="hand" aria-hidden="true">where the testing habit comes from</p>
           </div>
-        </div>
-        
-        {/* Certifications */}
-        <h3 className="text-base font-bold text-gray-900 dark:text-white mt-8 mb-4 uppercase tracking-wide">
-          Certifications
-        </h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {[
-            { name: 'Full-Stack Web Development', org: 'IBM', year: '2026', url: 'https://drive.google.com/file/d/1dRZhtPOu6FPOyfk1Yw_S85MbLP8ePIrr/view?usp=sharing' },
-            { name: 'Mastering Angular Development', org: 'Coursera - Edureka', year: '2026', url: 'https://drive.google.com/file/d/1pmTgRkBsmgjvi6lfu48TqrsnMGtJmDdc/view?usp=sharing' },
-            { name: 'The Complete Node.js Course', org: 'Mosh', year: '2025', url: 'https://drive.google.com/file/d/1ZNdYi9P3K68fqoGE3HjrWvYXDDOtqBVW/view?usp=sharing' },
-          ].map((cert) => (
-            <a
-              key={cert.name}
-              href={cert.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="pro-card p-4 group"
-            >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors text-sm">
-                    {cert.name}
-                  </p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">
-                    {cert.org} • {cert.year}
-                  </p>
+          <div className="exp-body">
+            <div className="exp-jobs">
+              {[sappers, raytheon].map((j) => (
+                <div key={j.org} className="exp-job rise">
+                  <div className="exp-title">
+                    <h3>{j.role}</h3>
+                    <p>{j.org} · <span className="mono">{j.years}</span></p>
+                  </div>
+                  <ul>
+                    {j.bullets.map((b) => <li key={b}>{b}</li>)}
+                  </ul>
                 </div>
-                <svg className="w-5 h-5 text-gray-400 group-hover:text-pink-500 transition-colors flex-shrink-0 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      {/* WORK EXPERIENCE */}
-      <section id="experience" className="py-12 sm:py-16 scroll-mt-24">
-        <h2 className="section-title">Experience</h2>
-        <div className="mt-8">
-          <div className="pro-card p-6 sm:p-8">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-5">
-              <div>
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white">
-                  Software Engineer II
-                </h3>
-                <p className="text-pink-600 dark:text-pink-400 font-medium mt-1">
-                  Raytheon
-                </p>
-              </div>
-              <span className="inline-flex items-center px-4 py-1.5 rounded-lg 
-                               bg-gradient-to-r from-pink-100 to-rose-100 dark:from-pink-900/20 dark:to-rose-900/20
-                               text-xs font-medium text-pink-700 dark:text-pink-300 whitespace-nowrap">
-                2020 – 2025
-              </span>
-            </div>
-            <ul className="space-y-2.5">
-              {[
-                'Led root cause analysis and resolution of complex system failures during Software-in-the-Loop and Hardware-in-the-Loop testing of multi-processor embedded systems (PPC and DSP architectures) in VxWorks/RTOS environments.',
-                'Developed embedded C/C++ software components for both PPC (VxWorks) and DSP architectures.',
-                'Designed and executed automated unit and module-level tests for mission-critical embedded C/C++ software using Google Test and GMock in Linux environments.',
-                'Collaborated within Agile development frameworks, supported test environment reproduction, and conducted software peer reviews.',
-                'Authored and reviewed technical documentation including test procedures, Problem Reports, and analysis reports.',
-              ].map((item, index) => (
-                <li key={index} className="flex items-start gap-3">
-                  <svg className="w-5 h-5 text-pink-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-700 dark:text-gray-300 text-sm">{item}</span>
-                </li>
               ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS */}
-      <section id="projects" className="py-12 sm:py-16 scroll-mt-24">
-        <h2 className="section-title">Projects</h2>
-
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
-          {projects.map((p) => (
-            <div key={p.slug} className="pro-card p-6 flex flex-col">
-              <Link href={`/projects/${p.slug}`} className="block mb-3 flex-grow group">
-                <h3 className="text-base font-bold text-gray-900 dark:text-white 
-                               group-hover:text-pink-600 dark:group-hover:text-pink-400 
-                               transition-colors mb-2">
-                  {p.name}
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-2 text-sm">
-                  {p.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {p.tech.slice(0, 4).map((tech) => (
-                    <span key={tech} className="tech-tag text-xs">{tech}</span>
-                  ))}
-                  {p.tech.length > 4 && (
-                    <span className="text-xs px-2 py-1 text-gray-500 dark:text-gray-400">
-                      +{p.tech.length - 4}
-                    </span>
-                  )}
-                </div>
-              </Link>
-
-              {/* Action Buttons */}
-              <div className="flex gap-2.5 mt-auto pt-4 border-t border-pink-200/30 dark:border-pink-700/20">
-                {p.demoUrl && (
-                  <a
-                    href={p.demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 btn-primary text-xs py-2 justify-center"
-                  >
-                    Live Demo
-                  </a>
-                )}
-                {p.repoUrl && (
-                  <a
-                    href={p.repoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 btn-secondary text-xs py-2 justify-center"
-                  >
-                    Repository
-                  </a>
-                )}
-              </div>
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact" className="py-12 sm:py-16 scroll-mt-24">
-        <div className="pro-card p-8 sm:p-12 text-center bg-gradient-to-br from-white to-pink-50/50 dark:from-slate-800 dark:to-pink-900/10">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-3">
-            Let&apos;s Work Together
-          </h2>
-          <p className="text-gray-700 dark:text-gray-300 mb-2 text-base max-w-2xl mx-auto font-medium">
-            I&apos;m currently{" "}
-            <span className="text-pink-600 dark:text-pink-400">
-              open to new opportunities
-            </span>
-          </p>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-xl mx-auto text-sm">
-            Looking for software engineering and full-stack development positions. 
-            Feel free to reach out if you think we&apos;d be a good match!
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3 mb-6">
-            <a
-              href="mailto:zkarem12@gmail.com"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm
-                         bg-pink-100 dark:bg-pink-900/20
-                         text-pink-700 dark:text-pink-300
-                         hover:bg-pink-200 dark:hover:bg-pink-900/30
-                         transition-all duration-200 border border-pink-300 dark:border-pink-700/30"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              zkarem12@gmail.com
-            </a>
-            <a
-              href="https://github.com/ZahraaSadeqProd"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm
-                         bg-pink-100 dark:bg-pink-900/20
-                         text-pink-700 dark:text-pink-300
-                         hover:bg-pink-200 dark:hover:bg-pink-900/30
-                         transition-all duration-200 border border-pink-300 dark:border-pink-700/30"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path fillRule="evenodd" clipRule="evenodd" 
-                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-              </svg>
-              GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/zahraa-sadeq-460199145/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm
-                         bg-pink-100 dark:bg-pink-900/20
-                         text-pink-700 dark:text-pink-300
-                         hover:bg-pink-200 dark:hover:bg-pink-900/30
-                         transition-all duration-200 border border-pink-300 dark:border-pink-700/30"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-              LinkedIn
-            </a>
+            <div className="exp-side rise">
+              <h3>Education</h3>
+              <ul className="plain">
+                {education.map((e) => (
+                  <li key={e.degree}><strong>{e.degree}</strong><span>{e.school} · <span className="mono">{e.years}</span> · {e.note}</span></li>
+                ))}
+              </ul>
+            </div>
           </div>
+        </section>
 
-          <a
-            href="https://drive.google.com/file/d/1GWC3OAR8ZIWbXhyxW_b27A5-9GU8FHAj/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 btn-primary text-base px-8 py-3.5"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
-                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            View My Resume
-          </a>
-        </div>
-      </section>
-    </main>
+        <Contact />
+      </div>
+
+      <style jsx>{`
+        .stage { position: fixed; inset: 0; z-index: 0; --open: 0; }
+        .stage-frame {
+          position: absolute;
+          inset: 0;
+          /* the frame opens with a clip, so the canvas never resizes while scrolling */
+          clip-path: inset(calc((1 - var(--open)) * 50svh) calc((1 - var(--open)) * 20px) calc((1 - var(--open)) * 20px) round calc((1 - var(--open)) * 14px));
+          background: #efe9dc;
+        }
+        .stage-fallback { position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent 0 23px, var(--line) 23px 24px), var(--bone-2); }
+        .story { position: relative; z-index: 1; }
+        .ch { position: relative; pointer-events: none; }
+        .ch :global(a), .ch :global(button) { pointer-events: auto; }
+
+        .ch-hero { display: flex; flex-direction: column; }
+        .hero-top { opacity: calc(1 - var(--open, 0) * 1.6); position: sticky; top: 0; padding-top: calc(70px + env(safe-area-inset-top, 0px)); height: 50svh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 22px; }
+        .hero-name { font-size: clamp(56px, 18.5vw, 300px); font-variation-settings: "wdth" 78, "opsz" 96; letter-spacing: -0.045em; line-height: 0.8; color: var(--green); white-space: nowrap; }
+        .scroll-cue { opacity: calc(1 - var(--open, 0) * 3); position: absolute; top: calc(100svh - 66px); left: max(40px, calc(env(safe-area-inset-left, 0px) + 40px)); color: var(--bone); background: var(--green); padding: 7px 12px; border-radius: 999px; font-size: 14px; font-weight: 500; }
+
+        .after { position: relative; z-index: 2; background: var(--bone); padding-top: 120px; }
+        .work-index { display: grid; gap: 28px; }
+        .work-index h2, .exp h2 { font-size: clamp(48px, 7vw, 104px); font-variation-settings: "wdth" 80, "opsz" 96; color: var(--green); }
+        .work-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--green); }
+        .work-list li { border-bottom: 1px solid var(--line); }
+        .work-index :global(.work-row) { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) 48px; grid-template-areas: "name line go" "name meta go"; gap: 6px 32px; padding: 34px 0; text-decoration: none; align-items: center; }
+        .work-index :global(.work-name) { grid-area: name; font: 800 clamp(40px, 5.4vw, 84px)/0.9 var(--display); font-variation-settings: "wdth" 80, "opsz" 96; letter-spacing: -0.04em; color: var(--green); transition: transform 0.5s var(--ease-out); }
+        .work-index :global(.work-line) { grid-area: line; font-size: 18px; max-width: 52ch; }
+        .work-index :global(.work-meta) { grid-area: meta; color: var(--pencil); }
+        .work-index :global(.work-go) { grid-area: go; width: 48px; height: 48px; border: 1.5px solid var(--green); border-radius: 50%; display: grid; place-items: center; color: var(--green); transition: background 0.3s, color 0.3s; }
+        .work-index :global(.work-go svg) { width: 18px; height: 18px; }
+        .work-index :global(.work-row:hover .work-name) { transform: translateX(10px); }
+        .work-index :global(.work-row:hover .work-go) { background: var(--green); color: var(--bone); }
+
+        .exp { padding-top: 140px; padding-bottom: 140px; display: grid; gap: 40px; }
+        .exp-head { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+        .exp-head .hand { font-size: 26px; transform: rotate(-3deg); margin-bottom: 10px; }
+        .exp-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 64px; border-top: 2px solid var(--green); padding-top: 32px; }
+        .exp-jobs { display: grid; gap: 48px; min-width: 0; }
+        .exp-title { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; margin-bottom: 18px; }
+        .exp h3 { font-size: 32px; font-variation-settings: "wdth" 85, "opsz" 48; color: var(--green); }
+        .exp-job ul { margin: 0; padding-left: 20px; display: grid; gap: 12px; max-width: 68ch; }
+        .exp-job li::marker { color: var(--green-2); }
+        .exp-side { display: grid; gap: 14px; align-content: start; }
+        .exp-side h3 { font-size: 24px; margin-top: 10px; }
+        .plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+        .plain li { display: grid; gap: 2px; }
+        .plain span { color: var(--pencil); font-size: 15px; }
+
+        @media (max-width: 860px) {
+          .ch { display: flex; flex-direction: column; }
+          .work-index :global(.work-row) { grid-template-columns: minmax(0, 1fr) 44px; grid-template-areas: "name go" "line line" "meta meta"; }
+          .exp-body { grid-template-columns: 1fr; gap: 40px; }
+        }
+        @media (max-width: 520px) {
+          .hero-name { font-size: 18vw; white-space: normal; }
+          .hero-top { height: 50svh; }
+
+        }
+      `}</style>
+    </div>
+  );
+}
+
+function ProjectPanel({ p, hand }: { p: (typeof projects)[number]; hand: string }) {
+  return (
+    <article className="panel">
+      <h2>{p.name}</h2>
+      <p className="hand reveal" aria-hidden="true">{hand}</p>
+      <p className="reveal">{p.line}</p>
+      <p className="reveal panel-note">{p.decisions[0].title}. {p.decisions[0].how}</p>
+      <dl className="facts reveal">
+        <div><dt>Role</dt><dd>{p.role}</dd></div>
+        <div><dt>Stack</dt><dd className="mono">{p.stack.slice(0, 4).join(" / ")}</dd></div>
+      </dl>
+      <div className="cta-row reveal">
+        <Link href={`/work/${p.slug}`} className="arrow-link">Read the case study <Arrow /></Link>
+        <a href={p.url} target="_blank" rel="noopener noreferrer" className="arrow-link">{p.urlLabel} <Arrow /></a>
+      </div>
+    </article>
   );
 }

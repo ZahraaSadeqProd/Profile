@@ -1,0 +1,13 @@
+import { NodeIO } from '@gltf-transform/core';
+import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
+import { prune, dedup, resample, weld, quantize, meshopt } from '@gltf-transform/functions';
+import { MeshoptEncoder } from 'meshoptimizer';
+await MeshoptEncoder.ready;
+const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.encoder': MeshoptEncoder });
+const [src, out] = process.argv.slice(2);
+const doc = await io.read(src);
+const root = doc.getRoot();
+for (const t of root.listTextures()) t.dispose();
+await doc.transform(prune({ keepAttributes: true }), dedup({ propertyTypes: ['Accessor', 'Mesh'] }), weld(), resample(), quantize(), meshopt({ encoder: MeshoptEncoder, level: 'medium' }));
+await io.write(out, doc);
+console.log(root.listMeshes().map(m => m.getName()).join(', '), '|', root.listMaterials().map(m => m.getName()).join(', '), '|', root.listAnimations().map(a => a.getName()));
