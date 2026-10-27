@@ -58,8 +58,8 @@ const para = (b) => {
   return `<w:p><w:pPr><w:pStyle w:val="${num || b.tag !== "li" ? style : "Normal"}"/>${num}</w:pPr>${b.runs.map(run).join("")}</w:p>`;
 };
 const W = 'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"';
-const style = (id, name, { size = 21, bold = false, color, before = 0, after = 40, caps = false, based = "Normal", border = false } = {}) =>
-  `<w:style w:type="paragraph" w:styleId="${id}"><w:name w:val="${name}"/><w:basedOn w:val="${based}"/><w:qFormat/><w:pPr><w:keepNext w:val="${id.startsWith("Heading") ? 1 : 0}"/><w:spacing w:before="${before}" w:after="${after}"/>${border ? '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="0D6E43"/></w:pBdr>' : ""}</w:pPr><w:rPr>${bold ? "<w:b/>" : ""}${caps ? "<w:caps/>" : ""}${color ? `<w:color w:val="${color}"/>` : ""}<w:sz w:val="${size}"/></w:rPr></w:style>`;
+const style = (id, name, { size = 21, bold = false, color, before = 0, after = 40, caps = false, based = "Normal", border = false, center = false } = {}) =>
+  `<w:style w:type="paragraph" w:styleId="${id}"><w:name w:val="${name}"/><w:basedOn w:val="${based}"/><w:qFormat/><w:pPr><w:keepNext w:val="${id.startsWith("Heading") ? 1 : 0}"/><w:spacing w:before="${before}" w:after="${after}"/>${center ? '<w:jc w:val="center"/>' : ""}${border ? '<w:pBdr><w:bottom w:val="single" w:sz="6" w:space="1" w:color="111111"/></w:pBdr>' : ""}</w:pPr><w:rPr>${bold ? "<w:b/>" : ""}${caps ? "<w:caps/>" : ""}${color ? `<w:color w:val="${color}"/>` : ""}<w:sz w:val="${size}"/></w:rPr></w:style>`;
 const files = {
   "[Content_Types].xml": `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/><Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/><Override PartName="/word/numbering.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.numbering+xml"/><Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/></Types>`,
   "_rels/.rels": `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>`,
@@ -67,12 +67,12 @@ const files = {
   "docProps/core.xml": `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><dc:title>${esc(META.title)}</dc:title><dc:subject>${esc(META.subject)}</dc:subject><dc:creator>${META.author}</dc:creator><cp:keywords>${esc(META.keywords)}</cp:keywords><dcterms:created xsi:type="dcterms:W3CDTF">${new Date().toISOString().slice(0, 19)}Z</dcterms:created></cp:coreProperties>`,
   "word/styles.xml": `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:styles ${W}><w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="21"/><w:lang w:val="en-US"/></w:rPr></w:rPrDefault><w:pPrDefault><w:pPr><w:spacing w:after="40" w:line="252" w:lineRule="auto"/></w:pPr></w:pPrDefault></w:docDefaults>`
     + `<w:style w:type="paragraph" w:default="1" w:styleId="Normal"><w:name w:val="Normal"/><w:qFormat/><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial" w:cs="Arial"/><w:sz w:val="21"/></w:rPr></w:style>`
-    + style("Title", "Title", { size: 40, bold: true, after: 20 })
-    + style("Subtitle", "Subtitle", { size: 23, bold: true, color: "0D6E43", after: 20 })
-    + style("Contact", "Contact", { size: 19, after: 80 })
-    + style("Heading1", "heading 1", { size: 22, bold: true, caps: true, color: "0D6E43", before: 200, after: 80, border: true })
+    + style("Title", "Title", { size: 40, bold: true, after: 20, center: true })
+    + style("Subtitle", "Subtitle", { size: 23, bold: true, after: 20 })
+    + style("Contact", "Contact", { size: 21, after: 20, center: true })
+    + style("Heading1", "heading 1", { size: 22, bold: true, caps: true, before: 200, after: 80, border: true })
     + style("Heading2", "heading 2", { size: 21, bold: true, before: 120, after: 0 })
-    + style("Meta", "Meta", { size: 19, color: "3D5A48", after: 40 })
+    + style("Meta", "Meta", { size: 19, color: "444444", after: 40 })
     + style("ListBullet", "List Bullet", { after: 20 })
     + `</w:styles>`,
   "word/numbering.xml": `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:numbering ${W}><w:abstractNum w:abstractNumId="0"><w:lvl w:ilvl="0"><w:start w:val="1"/><w:numFmt w:val="bullet"/><w:lvlText w:val="\u2022"/><w:lvlJc w:val="left"/><w:pPr><w:ind w:left="300" w:hanging="220"/></w:pPr><w:rPr><w:rFonts w:ascii="Arial" w:hAnsi="Arial"/></w:rPr></w:lvl></w:abstractNum><w:num w:numId="1"><w:abstractNumId w:val="0"/></w:num></w:numbering>`,

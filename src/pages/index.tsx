@@ -156,7 +156,24 @@ export default function Home() {
       </div>
 
       <div className="after">
-        <section id="work" className="work-index wrap" aria-labelledby="work-h">
+        <section id="experience" className="exp wrap" aria-labelledby="exp-h">
+          <h2 id="exp-h" className="rise">Experience</h2>
+          <div className="exp-jobs">
+            {[sappers, raytheon].map((j) => (
+              <div key={j.org} className="exp-job rise">
+                <div className="exp-title">
+                  <h3>{j.org}</h3>
+                  <p>{j.role} <span className="dot" aria-hidden="true">·</span> <span className="mono">{j.years}</span></p>
+                </div>
+                <ul>
+                  {j.bullets.map((b) => <li key={b}>{b}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="projects" className="work-index wrap" aria-labelledby="work-h">
           <h2 id="work-h" className="rise">Selected work</h2>
           <ol className="work-list">
             {projects.map((p) => (
@@ -172,34 +189,17 @@ export default function Home() {
           </ol>
         </section>
 
-        <section id="experience" className="exp wrap" aria-labelledby="exp-h">
-          <div className="exp-head rise">
-            <h2 id="exp-h">Experience</h2>
-            <p className="hand" aria-hidden="true">where the testing habit comes from</p>
-          </div>
-          <div className="exp-body">
-            <div className="exp-jobs">
-              {[sappers, raytheon].map((j) => (
-                <div key={j.org} className="exp-job rise">
-                  <div className="exp-title">
-                    <h3>{j.role}</h3>
-                    <p>{j.org} · <span className="mono">{j.years}</span></p>
-                  </div>
-                  <ul>
-                    {j.bullets.map((b) => <li key={b}>{b}</li>)}
-                  </ul>
-                </div>
-              ))}
-            </div>
-            <div className="exp-side rise">
-              <h3>Education</h3>
-              <ul className="plain">
-                {education.map((e) => (
-                  <li key={e.degree}><strong>{e.degree}</strong><span>{e.school} · <span className="mono">{e.years}</span> · {e.note}</span></li>
-                ))}
-              </ul>
-            </div>
-          </div>
+        <section id="education" className="edu wrap" aria-labelledby="edu-h">
+          <h2 id="edu-h" className="rise">Education</h2>
+          <ul className="edu-list">
+            {education.map((e) => (
+              <li key={e.degree} className="rise">
+                <strong>{e.degree}</strong>
+                <span>{e.school}</span>
+                <span className="mono">{e.years} · {e.note}</span>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <Contact />
@@ -226,7 +226,7 @@ export default function Home() {
 
         .after { position: relative; z-index: 2; background: var(--bone); padding-top: 120px; }
         .work-index { display: grid; gap: 28px; }
-        .work-index h2, .exp h2 { font-size: clamp(48px, 7vw, 104px); font-variation-settings: "wdth" 80, "opsz" 96; color: var(--green); }
+        .work-index h2, .exp h2, .edu h2 { font-size: clamp(48px, 7vw, 104px); font-variation-settings: "wdth" 80, "opsz" 96; color: var(--green); }
         .work-list { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--green); }
         .work-list li { border-bottom: 1px solid var(--line); }
         .work-index :global(.work-row) { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr) 48px; grid-template-areas: "name line go" "name meta go"; gap: 6px 32px; padding: 34px 0; text-decoration: none; align-items: center; }
@@ -238,25 +238,24 @@ export default function Home() {
         .work-index :global(.work-row:hover .work-name) { transform: translateX(10px); }
         .work-index :global(.work-row:hover .work-go) { background: var(--green); color: var(--bone); }
 
-        .exp { padding-top: 140px; padding-bottom: 140px; display: grid; gap: 40px; }
-        .exp-head { display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
-        .exp-head .hand { font-size: 26px; transform: rotate(-3deg); margin-bottom: 10px; }
-        .exp-body { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 64px; border-top: 2px solid var(--green); padding-top: 32px; }
-        .exp-jobs { display: grid; gap: 48px; min-width: 0; }
-        .exp-title { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: baseline; margin-bottom: 18px; }
+        .exp { padding-bottom: 140px; display: grid; gap: 40px; }
+        .exp-jobs { display: grid; gap: 56px; border-top: 2px solid var(--green); padding-top: 32px; }
+        .exp-title { display: grid; gap: 6px; margin-bottom: 20px; }
+        .exp-title p { font-weight: 600; color: var(--ink); }
+        .exp-title .mono { font-size: 14px; font-weight: 500; color: var(--pencil); }
+        .exp-title .dot { color: var(--green-2); margin: 0 4px; }
         .exp h3 { font-size: 32px; font-variation-settings: "wdth" 85, "opsz" 48; color: var(--green); }
-        .exp-job ul { margin: 0; padding-left: 20px; display: grid; gap: 12px; max-width: 68ch; }
+        .exp-job ul { margin: 0; padding-left: 20px; display: grid; gap: 12px; max-width: 76ch; }
         .exp-job li::marker { color: var(--green-2); }
-        .exp-side { display: grid; gap: 14px; align-content: start; }
-        .exp-side h3 { font-size: 24px; margin-top: 10px; }
-        .plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-        .plain li { display: grid; gap: 2px; }
-        .plain span { color: var(--pencil); font-size: 15px; }
+        .edu { padding-top: 140px; padding-bottom: 140px; display: grid; gap: 40px; }
+        .edu-list { list-style: none; margin: 0; padding: 32px 0 0; border-top: 2px solid var(--green); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 40px 64px; }
+        .edu-list li { display: grid; gap: 4px; align-content: start; }
+        .edu-list strong { font: 800 28px/1.05 var(--display); font-variation-settings: "wdth" 85, "opsz" 48; letter-spacing: -0.03em; color: var(--green); margin-bottom: 6px; }
+        .edu-list span { color: var(--pencil); }
 
         @media (max-width: 860px) {
           .ch { display: flex; flex-direction: column; }
           .work-index :global(.work-row) { grid-template-columns: minmax(0, 1fr) 44px; grid-template-areas: "name go" "line line" "meta meta"; }
-          .exp-body { grid-template-columns: 1fr; gap: 40px; }
         }
         @media (max-width: 520px) {
           .hero-name { font-size: 18vw; white-space: normal; }

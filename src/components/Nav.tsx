@@ -11,8 +11,8 @@ export default function Nav() {
           <span>Zahraa Sadeq</span>
         </Link>
         <nav aria-label="Primary">
-          <Link href="/#work">Work</Link>
-          <Link href="/#experience" className="hide-xs">Experience</Link>
+          <Link href="/#experience" className="hide-xs">Work</Link>
+          <Link href="/#projects">Projects</Link>
           <Link href="/#contact" className="hide-xs">Contact</Link>
           <span className="sep" aria-hidden="true" />
           <a href={`mailto:${links.email}`} className="icon" aria-label={`Email ${links.email}`} title={links.email}><MailIcon /></a>

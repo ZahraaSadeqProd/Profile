@@ -56,7 +56,7 @@ export default function CaseStudy({ project: p, next }: Props) {
       </Head>
 
       <header className="cs-head wrap">
-        <Link href="/#work" className="back"><span className="back-arrow"><Arrow /></span> All work</Link>
+        <Link href="/#projects" className="back"><span className="back-arrow"><Arrow /></span> All projects</Link>
         <h1 className="cs-name">{p.name}</h1>
         <div className="cs-lead">
           <p className="cs-line">{p.line}</p>
