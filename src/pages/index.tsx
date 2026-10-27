@@ -174,7 +174,7 @@ export default function Home() {
         </section>
 
         <section id="projects" className="work-index wrap" aria-labelledby="work-h">
-          <h2 id="work-h" className="rise">Selected work</h2>
+          <h2 id="work-h" className="rise">Projects</h2>
           <ol className="work-list">
             {projects.map((p) => (
               <li key={p.slug} className="rise">
