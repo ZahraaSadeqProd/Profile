@@ -6,7 +6,7 @@ export const links = {
 };
 
 export const intro =
-  "AI/ML engineer. I build AI products end to end: vision models that read real labels, scoring engines that cite public science, and agent systems that run under audit.";
+  "Software engineer. I build AI products end to end: vision models that read real labels, scoring engines that cite public science, and agent systems that run under audit.";
 
 export const sappers = {
   role: "Sr. Software Engineer",

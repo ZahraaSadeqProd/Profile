@@ -98,9 +98,9 @@ export default function Home() {
   return (
     <div ref={root}>
       <Head>
-        <title>Zahraa Sadeq · AI/ML Engineer</title>
-        <meta name="description" content="Zahraa Sadeq is an AI/ML engineer who builds AI products end to end: Nesvia and Swazona Media. Sr. Software Engineer at Sappers Group, formerly embedded C/C++ at Raytheon." />
-        <meta property="og:title" content="Zahraa Sadeq · AI/ML Engineer" />
+        <title>Zahraa Sadeq · Software Engineer</title>
+        <meta name="description" content="Zahraa Sadeq is a software engineer who builds AI products end to end: Nesvia and Swazona Media. Sr. Software Engineer at Sappers Group, formerly embedded C/C++ at Raytheon." />
+        <meta property="og:title" content="Zahraa Sadeq · Software Engineer" />
         <meta property="og:description" content={intro} />
       </Head>
 
@@ -112,6 +112,7 @@ export default function Home() {
         <section className="ch ch-hero" style={{ height: `${vh("hero")}vh` }}>
           <div className="hero-top wrap">
             <h1 className="hero-name">Zahraa Sadeq</h1>
+            <p className="hero-role">Software Engineer</p>
           </div>
           <p className="scroll-cue">Scroll to step inside the work</p>
         </section>
@@ -222,6 +223,7 @@ export default function Home() {
         .ch-hero { display: flex; flex-direction: column; }
         .hero-top { opacity: calc(1 - var(--open, 0) * 1.6); position: sticky; top: 0; padding-top: calc(70px + env(safe-area-inset-top, 0px)); height: 50svh; display: flex; flex-direction: column; justify-content: flex-end; padding-bottom: 22px; }
         .hero-name { font-size: clamp(56px, 18.5vw, 300px); font-variation-settings: "wdth" 78, "opsz" 96; letter-spacing: -0.045em; line-height: 0.8; color: var(--green); white-space: nowrap; }
+        .hero-role { margin: 22px 0 0; font-size: clamp(18px, 1.9vw, 28px); font-weight: 600; letter-spacing: -0.01em; line-height: 1.1; color: var(--green); }
         .scroll-cue { opacity: calc(1 - var(--open, 0) * 3); position: absolute; top: calc(100svh - 66px); left: max(40px, calc(env(safe-area-inset-left, 0px) + 40px)); color: var(--bone); background: var(--green); padding: 7px 12px; border-radius: 999px; font-size: 14px; font-weight: 500; }
 
         .after { position: relative; z-index: 2; background: var(--bone); padding-top: 120px; }

@@ -30,7 +30,7 @@ export default function Contact() {
         </ul>
         <div className="sign">
           <Logo size={40} tone="bone" />
-          <p>Zahraa Sadeq · AI/ML Engineer · © 2026</p>
+          <p>Zahraa Sadeq · Software Engineer · © 2026</p>
         </div>
         <p className="credit">
           Study figure based on{" "}
