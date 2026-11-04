@@ -6,9 +6,9 @@ import { links } from "../content";
 // applicant tracking systems parse best. So the markup stays plain on purpose: one column, real headings, real lists,
 // text in reading order, no tables or text boxes.
 
-const TITLE = "Zahraa Sadeq · Résumé · AI/ML Engineer";
+const TITLE = "Zahraa Sadeq · Résumé · Software Engineer";
 const DESCRIPTION =
-  "Résumé of Zahraa Sadeq, AI/ML engineer: LLM APIs, AI agents and RAG at Sappers Group, builder of Nesvia and Swazona Media, and five years of embedded C/C++ at Raytheon. M.S. ECE, University of Arizona.";
+  "Résumé of Zahraa Sadeq, software engineer: LLM APIs, AI agents and RAG at Sappers Group, builder of Nesvia and Swazona Media, and five years of embedded C/C++ at Raytheon. M.S. ECE, University of Arizona.";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -18,7 +18,7 @@ const jsonLd = {
   mainEntity: {
     "@type": "Person",
     name: r.name,
-    jobTitle: "AI/ML Engineer",
+    jobTitle: "Software Engineer",
     url: SITE,
     email: `mailto:${r.email}`,
     address: { "@type": "PostalAddress", addressLocality: "Tucson", addressRegion: "AZ", addressCountry: "US" },

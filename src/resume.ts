@@ -6,7 +6,7 @@ export const SITE = "https://zahraasadeq.dev";
 
 export const resume = {
   name: "Zahraa Sadeq",
-  headline: "AI/ML Engineer · Senior Software Engineer",
+  headline: "Software Engineer",
   location: "Tucson, AZ",
   phone: "(520) 404-3093",
   email: "zkarem12@gmail.com",
